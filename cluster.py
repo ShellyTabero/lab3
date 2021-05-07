@@ -1,24 +1,5 @@
 from point import Point
-import math
-
-
-def median(values):
-    """
-    Calculates the median number of all the values in  a list.
-    :param values: A list of integers
-    :returns: Median of all values.
-    """
-    sorted_values = sorted(values)
-    middle = math.ceil(len(sorted_values) / 2)
-
-    # Even list length
-    if len(sorted_values) % 2 == 0:
-        x1 = sorted_values[middle - 1]
-        x2 = sorted_values[middle]
-        return (x1 + x2) / 2
-
-    # Odd list length
-    return sorted_values[middle - 1]
+import statistics
 
 
 class Cluster:
@@ -55,7 +36,7 @@ class Cluster:
                 new_coordinates[coordinate_index].append(coordinate_value)
 
         # Divide to find mean
-        new_coordinates = [median(x) for x in new_coordinates]
+        new_coordinates = [statistics.median(x) for x in new_coordinates]
         self._centroid.set_coordinates(new_coordinates)
 
         is_changed = (old_centroid != tuple(self._centroid.coordinates))
